@@ -1,0 +1,28 @@
+app = "hotel-management-system"
+primary_region = "ord"
+
+[build]
+  builder = "heroku/buildpacks:20"
+
+[env]
+  NODE_ENV = "production"
+  PORT = "8080"
+
+[http_service]
+  internal_port = 5000
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ["app"]
+
+[[http_service.checks]]
+  interval = "10s"
+  grace_period = "5s"
+  method = "GET"
+  path = "/"
+  protocol = "http"
+  timeout = "2s"
+
+[deploy]
+  release_command = "npm run db:push"
