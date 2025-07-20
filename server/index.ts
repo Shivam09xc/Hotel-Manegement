@@ -10,6 +10,23 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // ✅ Healthcheck route (required by Railway)
+
+app.get("/", (_req, res) => {
+  res.status(200).send("✅ Server is running!");
+});
+
+let setupVite, serveStatic, log;
+
+if (process.env.NODE_ENV === "development") {
+  const vite = await import("./vite");
+  setupVite = vite.setupVite;
+  log = vite.log;
+} else {
+  const vite = await import("./vite");
+  serveStatic = vite.serveStatic;
+  log = vite.log;
+}
+
 app.get("/", (_req, res) => {
   res.status(200).send("✅ Server is running!");
 });
