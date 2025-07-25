@@ -4,7 +4,7 @@
   "type": "module",
   "license": "MIT",
   "scripts": {
-    "dev": "tsx server/index.ts",
+    "dev": "NODE_ENV=development tsx server/index.ts",
     "build": "echo \"No build step needed for backend\"",
     "start": "NODE_ENV=production tsx server/index.ts",
     "check": "tsc",
