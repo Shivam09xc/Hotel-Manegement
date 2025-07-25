@@ -4,7 +4,9 @@
   "type": "module",
   "license": "MIT",
   "scripts": {
-    "dev": "NODE_ENV=development tsx server/index.ts",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "NODE_ENV=development tsx server/index.ts",
+    "client": "cd client && npm run dev",
     "build": "echo \"No build step needed for backend\"",
     "start": "NODE_ENV=production tsx server/index.ts",
     "check": "tsc",
@@ -83,6 +85,7 @@
     "bufferutil": "^4.0.8"
   },
   "devDependencies": {
+    "concurrently": "^8.2.2",
     "@replit/vite-plugin-runtime-error-modal": "^0.0.3",
     "@types/express": "^5.0.3",
     "@vitejs/plugin-react": "^4.3.1",
